@@ -13,4 +13,14 @@ export class ReservationController {
   ) {
     return this.reservationService.reserve(eventId, seatId, userId);
   }
+
+  // 낙관적 락 (새로 추가)
+  @Post('events/:eventId/seats/:seatId/reserve-optimistic')
+  reserveOptimistic(
+    @Param('eventId') eventId: number,
+    @Param('seatId') seatId: number,
+    @Body('userId') userId: string,
+  ) {
+    return this.reservationService.reserveOptimistic(eventId, seatId, userId);
+  }
 }

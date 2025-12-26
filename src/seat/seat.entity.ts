@@ -6,6 +6,7 @@ import {
   ManyToOne,
   OneToOne,
   PrimaryGeneratedColumn,
+  VersionColumn,
 } from 'typeorm';
 
 @Entity()
@@ -18,6 +19,9 @@ export class Seat {
 
   @Column({ default: false })
   isReserved: boolean;
+
+  @VersionColumn() // 낙관적 락용 버전 컬럼
+  version: number;
 
   @ManyToOne(() => Event, (event) => event.seats)
   event: Event;
