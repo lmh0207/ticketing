@@ -23,4 +23,14 @@ export class ReservationController {
   ) {
     return this.reservationService.reserveOptimistic(eventId, seatId, userId);
   }
+
+  // Redis 분산 락
+  @Post('events/:eventId/seats/:seatId/reserve-redis')
+  reserveWithRedis(
+    @Param('eventId') eventId: number,
+    @Param('seatId') seatId: number,
+    @Body('userId') userId: string,
+  ) {
+    return this.reservationService.reserveWithRedis(eventId, seatId, userId);
+  }
 }
